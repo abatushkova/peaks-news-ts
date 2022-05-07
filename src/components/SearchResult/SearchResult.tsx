@@ -1,9 +1,9 @@
 import React from 'react';
-import PageHeader from '../../components/PageHeader/PageHeader';
+import PageHeader from '../PageHeader/PageHeader';
 // import Grid from '../../components/Grid/Grid';
 import './SearchResult.scss';
 
-function SearchResult() {
+const SearchResult = () => {
   return (
     <main className="container">
       <PageHeader />

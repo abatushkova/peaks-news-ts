@@ -1,7 +1,7 @@
 import React from 'react';
 import './Snackbar.scss';
 
-function Snackbar() {
+const Snackbar = () => {
   return (
     <div className="snackbar">
       <span className="snackbar__icon"></span>

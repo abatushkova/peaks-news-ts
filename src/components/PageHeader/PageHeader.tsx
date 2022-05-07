@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import './PageHeader.scss';
 
-function PageHeader() {
+const PageHeader = () => {
   return (
     <div className="page-header">
       <h1 className="page-header__title">Top stories</h1>

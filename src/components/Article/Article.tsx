@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from '../../components/Button/Button';
+import Button from '../Button/Button';
 import './Article.scss';
 
-function Article() {
+const Article = () => {
   return (
     <main className="container">
       <Button />

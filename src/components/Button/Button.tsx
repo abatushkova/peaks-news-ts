@@ -1,7 +1,7 @@
 import React from 'react';
 import './Button.scss';
 
-function Button() {
+const Button = () => {
   return (
     <button className="button">
 

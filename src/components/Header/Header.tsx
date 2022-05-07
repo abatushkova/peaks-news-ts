@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 
-function Header() {
+const Header = () => {
   return (
     <header className="main-header">
       <div className="main-header__menu page__layout">

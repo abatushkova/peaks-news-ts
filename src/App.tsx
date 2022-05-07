@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home/Home';
+import Home from './components/Home/Home';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import Bookmarks from './pages/Bookmarks/Bookmarks';
-import SearchResult from './pages/SearchResult/SearchResult';
-import Article from './pages/Article/Article';
+import Bookmarks from './components/Bookmarks/Bookmarks';
+import SearchResult from './components/SearchResult/SearchResult';
+import Article from './components/Article/Article';
 import './App.scss';
 
 const App = () => {
