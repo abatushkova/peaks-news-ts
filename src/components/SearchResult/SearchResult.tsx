@@ -5,7 +5,7 @@ import './SearchResult.scss';
 
 const SearchResult = () => {
   return (
-    <main className="container">
+    <main className="layout">
       <PageHeader />
       {/* <Grid /> */}
     </main>

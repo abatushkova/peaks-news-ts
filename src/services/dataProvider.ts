@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 const apiKey = '425062e9-cd91-4b2f-a513-04b355f37184';
-const pageSize = 10;
+const pageSize = 15;
 
-const baseUrl = `https://content.guardianapis.com/search?show-fields=headline,body,thumbnail&page-size=${pageSize}&api-key=${apiKey}`;
+let baseUrl = `https://content.guardianapis.com/search?show-fields=headline,body,thumbnail&page-size=${pageSize}&api-key=${apiKey}`;
 
 interface SearchResponseEntity {
   response: SearchResultEntity;
@@ -25,9 +25,11 @@ export interface ArticleEntity {
   fields: ArticleFieldsEntity;
 }
 
-export const getArticle = async (sectionID:string):Promise<ArticleEntity[]> => {
+export const getArticle = async (sectionID:string, orderBy:string):Promise<ArticleEntity[]> => {
+  baseUrl = `${baseUrl}&section=${sectionID}&order-by=${orderBy}`;
+
   try {
-    const response = await axios.get<SearchResponseEntity>(`${baseUrl}&section=${sectionID}`);
+    const response = await axios.get<SearchResponseEntity>(baseUrl);
 
     return response.data.response.results;
   } catch (err) {

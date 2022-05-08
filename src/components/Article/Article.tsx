@@ -4,7 +4,7 @@ import './Article.scss';
 
 const Article = () => {
   return (
-    <main className="container">
+    <main className="layout">
       <Button />
       <article className="doc">
         <time className="doc__date"></time>

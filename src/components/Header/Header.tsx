@@ -6,7 +6,7 @@ import './Header.scss';
 const Header = () => {
   return (
     <header className="main-header">
-      <div className="main-header__menu container">
+      <div className="main-header__menu layout">
         <Link to="/" className="main-header__link">
           <img src={logo} alt="The Peaks logo" className="main-header__img" />
         </Link>

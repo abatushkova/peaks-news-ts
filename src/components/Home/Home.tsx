@@ -24,23 +24,19 @@ const sections: SectionModel[] = [
 ];
 
 const Home = () => {
-
   return (
-    <main className="container">
+    <main className="main layout">
       <PageHeader />
       <Grid gridMode="mosaic" title="" cards={[]} id="news" />
 
-      {sections.map((section, index) => {
-        return (
-          <Grid
-            key={section.id + index}
-            title={section.title}
-            gridMode=""
-            id={section.id}
-            cards={[]}
-          />
-        );
-      })}
+      {sections.map((section, index) => { return (
+        <Grid
+          key={section.id + index}
+          title={section.title}
+          id={section.id}
+          cards={[]}
+        />
+      )})}
     </main>
   );
 };
