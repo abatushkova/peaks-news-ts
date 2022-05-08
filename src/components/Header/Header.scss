@@ -1,0 +1,25 @@
+.main-header {
+  display: flex;
+  height: 126px;
+  background-color: #09357B;
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__link {
+    display: flex;
+    width: 132px;
+  }
+
+  &__img {
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  &__search-form {
+    align-self: flex-end;
+  }
+}

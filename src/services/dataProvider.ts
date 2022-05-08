@@ -1,13 +1,9 @@
 import axios from 'axios';
 
 const apiKey = '425062e9-cd91-4b2f-a513-04b355f37184';
-const pageSize = 200;
-const baseSection = 'news';
-const categorySection = 'sport|culture|lifeandstyle';
+const pageSize = 10;
 
-const baseUrl = `https://content.guardianapis.com/search?section=${baseSection}&show-fields=headline,body,thumbnail&page-size=${pageSize}&api-key=${apiKey}`;
-
-const categoryUrl = `https://content.guardianapis.com/search?section=${categorySection}&show-fields=headline,body,thumbnail&page-size=${pageSize}&api-key=${apiKey}`;
+const baseUrl = `https://content.guardianapis.com/search?show-fields=headline,body,thumbnail&page-size=${pageSize}&api-key=${apiKey}`;
 
 interface SearchResponseEntity {
   response: SearchResultEntity;
@@ -25,13 +21,13 @@ interface ArticleFieldsEntity {
 
 export interface ArticleEntity {
   webTitle: string;
-  sectionName: string;
+  id: string;
   fields: ArticleFieldsEntity;
 }
 
-export const getData = async ():Promise<ArticleEntity[]> => {
+export const getArticle = async (sectionID:string):Promise<ArticleEntity[]> => {
   try {
-    const response = await axios.get<SearchResponseEntity>(baseUrl);
+    const response = await axios.get<SearchResponseEntity>(`${baseUrl}&section=${sectionID}`);
 
     return response.data.response.results;
   } catch (err) {
