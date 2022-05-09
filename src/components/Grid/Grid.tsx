@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { useTrackedState } from '../../store';
+import React from 'react';
 import { Card, CardModel } from '../Card/Card';
-import { getArticle, ArticleEntity } from "../../services/dataProvider";
 import './Grid.scss';
 
+export interface GridProps extends GridModel {
+  gridType: string;
+  title?: string;
+}
 export interface GridModel {
   cards: CardModel[];
-  gridMode?: string;
-  id: string;
-  title: string;
 }
 
-const renderSwitch = (props:GridModel) => {
-  switch(props.gridMode) {
+const renderSwitch = (gridType:string, cards:CardModel[]) => {
+  switch(gridType) {
     case "mosaic":
-      return renderMosaicCards(props.cards);
+      return renderMosaicCards(cards);
     default:
-      return renderGridCards(props.cards);
+      return renderGridCards(cards);
   }
 };
 
 const renderMosaicCards = (cards:CardModel[]) => {
   const partials = cards.slice(0, 8);
-
   return (
     <>
       <Card {...partials[0]} size='is-6' />
@@ -35,58 +33,23 @@ const renderMosaicCards = (cards:CardModel[]) => {
       <Card {...partials[7]} size='is-4' />
     </>
   )
-}
+};
 
 const renderGridCards = (cards:CardModel[]) => {
   return cards.map((cardProps) => {
-    return <Card {...cardProps} size='is-4' key={cardProps.id} />
+    return <Card {...cardProps} size='is-4' key={cardProps.cardId} />
   })
 };
 
-const matchData = (articles:ArticleEntity[]) => {
-  const cards = articles.map(article => ({
-    title: article.webTitle,
-    headline: article.fields.headline,
-    body: article.fields.body,
-    thumbnail: article.fields.thumbnail,
-    id: article.id,
-    size: '',
-    isTextOnly: false,
-    isTitleOnly: false,
-  })) as CardModel[];
-
-  return { cards } as GridModel;
-};
-
-export const Grid = (props:GridModel) => {
-  const orderBy:string = useTrackedState().orderBy;
-  const [grid, setGrid] = useState<GridModel>({
-    cards: props.cards,
-    gridMode: props.gridMode,
-    id: props.id,
-    title: props.title,
-  });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getArticle(props.id, orderBy);
-
-      setGrid(prevState => {
-        return {...prevState, ...matchData(data)};
-      })
-    };
-
-    fetchData()
-      .catch(console.error);
-  },[props.id, orderBy]);
-
+export const Grid = (props:GridProps) => {
   return (
+    (props.cards.length === 0) ? null :
     <>
       {props.title && <h2 className="grid-title">{props.title}</h2>}
 
       <div className="grid">
-        {renderSwitch(grid)}
+        {renderSwitch(props.gridType, props.cards)}
       </div>
     </>
-  )
+  );
 };

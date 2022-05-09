@@ -1,14 +1,24 @@
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 10% 0;
 }
 
-@keyframes App-logo-spin {
-  from {
+.spinner-item {
+  width: 88px;
+  height: 88px;
+  border: 8px solid #09357B;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
   }
 }

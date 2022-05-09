@@ -1,15 +1,64 @@
-import React from 'react';
-import PageHeader from '../PageHeader/PageHeader';
-// import Grid from '../../components/Grid/Grid';
+import React, { useEffect } from 'react';
+import { PageHeader } from '../PageHeader/PageHeader';
+import { Grid } from '../../components/Grid/Grid';
+import { useTrackedState, useUpdate } from '../../store';
+import { Spinner } from '../Spinner/Spinner';
+import { ArticleEntity, getArticle } from '../../services/dataProvider';
+import { CardModel } from '../Card/Card';
 import './SearchResult.scss';
 
-const SearchResult = () => {
+interface SectionModel {
+  id: string;
+  title: string;
+}
+
+const section: SectionModel = {
+    id: 'news|sport|culture|lifeandstyle',
+    title: '',
+};
+
+const mapData = (articles:ArticleEntity[] | undefined) => {
+  return articles?.map(article => ({
+    title: article.webTitle,
+    headline: article.fields.headline,
+    body: article.fields.body,
+    thumbnail: article.fields.thumbnail,
+    cardId: article.id,
+    size: '',
+    isTextOnly: false,
+    isTitleOnly: false,
+  })) as CardModel[];
+};
+
+export const SearchResult = () => {
+  const setGlobalState = useUpdate();
+  const {
+    isLoading,
+    orderBy,
+    dataDictionary,
+    searchQuery
+  } = useTrackedState();
+
+  useEffect(() => {
+    getArticle(section.id, orderBy, searchQuery)
+    .then((data) => {
+      setGlobalState(prev => {
+        const d = new Map(prev.dataDictionary);
+        d.set(section.id, data);
+        return ({...prev, dataDictionary: d, isLoading: false});
+      });
+    })
+  },[orderBy, setGlobalState, searchQuery]);
+
   return (
-    <main className="layout">
-      <PageHeader />
-      {/* <Grid /> */}
+    <main className="main layout">
+      <PageHeader title="Search results" />
+      {isLoading
+        ? <Spinner />
+        : <>
+            <Grid gridType="grid" cards={mapData(dataDictionary.get(section.id))} />
+          </>
+      }
     </main>
   );
 };
-
-export default SearchResult;

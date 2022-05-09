@@ -20,20 +20,21 @@ interface ArticleFieldsEntity {
 }
 
 export interface ArticleEntity {
-  webTitle: string;
   id: string;
+  // webPublicationDate: string;
+  webTitle: string;
   fields: ArticleFieldsEntity;
 }
 
-export const getArticle = async (sectionID:string, orderBy:string):Promise<ArticleEntity[]> => {
-  baseUrl = `${baseUrl}&section=${sectionID}&order-by=${orderBy}`;
+export const getArticle = async (sectionId:string, orderBy:string, query?:string):Promise<ArticleEntity[]> => {
+  const q = query ? `&q=${query}` : '';
 
   try {
-    const response = await axios.get<SearchResponseEntity>(baseUrl);
+    const response = await axios.get<SearchResponseEntity>(`${baseUrl}&section=${sectionId}&order-by=${orderBy}${q}`);
 
     return response.data.response.results;
   } catch (err) {
     console.error(err);
     return [];
   }
-}
+};

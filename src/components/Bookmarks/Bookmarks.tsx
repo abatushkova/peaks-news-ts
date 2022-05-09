@@ -1,15 +1,13 @@
 import React from 'react';
-import PageHeader from '../PageHeader/PageHeader';
-// import Grid from '../../components/Grid/Grid';
+import { PageHeader } from '../PageHeader/PageHeader';
+import { Grid } from '../../components/Grid/Grid';
 import './Bookmarks.scss';
 
-const Bookmarks = () => {
+export const Bookmarks = () => {
   return (
-    <main className="layout">
-      <PageHeader />
-      {/* <Grid /> */}
+    <main className="main layout">
+      <PageHeader title="All bookmark" />
+      <Grid gridType="grid" cards={[]} />
     </main>
   );
 };
-
-export default Bookmarks;

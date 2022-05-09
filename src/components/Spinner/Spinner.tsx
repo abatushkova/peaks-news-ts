@@ -1,11 +1,12 @@
 import React from 'react';
-import './Preloader.scss';
+import './Spinner.scss';
 
-const Preloader = () => {
+export const Spinner = () => {
   return (
-    <div className="preloader">
-    </div>
+    <main className="main layout">
+      <div className="spinner-wrapper">
+        <div className="spinner-item"></div>
+      </div>
+    </main>
   );
 };
-
-export default Preloader;

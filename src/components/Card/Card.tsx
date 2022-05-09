@@ -8,7 +8,7 @@ export interface CardModel {
   body: string;
   thumbnail?: string;
   size: string;
-  id: string;
+  cardId: string;
   isTextOnly: boolean;
   isTitleOnly: boolean;
 }
@@ -29,14 +29,14 @@ const renderImage = (props: CardModel) => {
     )
   }
   return '';
-}
+};
 
 const renderSubtitle = (props: CardModel) => {
   if (!props.isTitleOnly) {
     return <p className="card__subtitle">{props.headline}</p>
   }
   return '';
-}
+};
 
 export const Card = (props: CardModel) => {
   return (

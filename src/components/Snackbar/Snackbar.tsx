@@ -1,7 +1,7 @@
 import React from 'react';
 import './Snackbar.scss';
 
-const Snackbar = () => {
+export const Snackbar = () => {
   return (
     <div className="snackbar">
       <span className="snackbar__icon"></span>
@@ -9,5 +9,3 @@ const Snackbar = () => {
     </div>
   );
 };
-
-export default Snackbar;

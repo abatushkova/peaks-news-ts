@@ -1,20 +1,27 @@
 import { useState } from 'react';
 import { createContainer } from 'react-tracked';
+import { ArticleEntity } from './services/dataProvider';
 
 interface GlobalStateModel {
   orderBy: string;
   searchQuery?: string;
-};
+  isLoading: boolean;
+  sectionId: string;
+  dataDictionary: Map<string, ArticleEntity[]>;
+}
 
 const initialGlobalState = {
   orderBy: 'newest',
   searchQuery: '',
+  isLoading: true,
+  sectionId: '',
+  dataDictionary: new Map(),
 };
 
-const useValue = () => useState<GlobalStateModel>({...initialGlobalState});
+export const useValue = () => useState<GlobalStateModel>(initialGlobalState);
 
 export const {
   Provider,
   useTrackedState,
-  useUpdate: useSetState,
+  useUpdate,
 } = createContainer(useValue);

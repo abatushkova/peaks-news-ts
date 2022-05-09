@@ -1,6 +1,10 @@
-import React from 'react';
-import PageHeader from '../PageHeader/PageHeader';
+import React, { useEffect } from 'react';
+import { PageHeader } from '../PageHeader/PageHeader';
 import { Grid } from '../Grid/Grid';
+import { useTrackedState, useUpdate } from '../../store';
+import { Spinner } from '../Spinner/Spinner';
+import { getArticle, ArticleEntity } from '../../services/dataProvider';
+import { CardModel } from '../Card/Card';
 import './Home.scss';
 
 interface SectionModel {
@@ -9,6 +13,10 @@ interface SectionModel {
 }
 
 const sections: SectionModel[] = [
+  {
+    id: 'news',
+    title: 'Top stories',
+  },
   {
     id: 'sport',
     title: 'Sport',
@@ -23,22 +31,62 @@ const sections: SectionModel[] = [
   },
 ];
 
-const Home = () => {
+const mapData = (articles:ArticleEntity[] | undefined) => {
+  return articles?.map(article => ({
+    title: article.webTitle,
+    headline: article.fields.headline,
+    body: article.fields.body,
+    thumbnail: article.fields.thumbnail,
+    cardId: article.id,
+    size: '',
+    isTextOnly: false,
+    isTitleOnly: false,
+  })) as CardModel[];
+};
+
+export const Home = () => {
+  const topNews = sections[0];
+  const otherNews = sections.slice(1);
+
+  const setGlobalState = useUpdate();
+  const { isLoading, orderBy, dataDictionary } = useTrackedState();
+
+  useEffect(() => {
+    Promise.all(sections.map(section => {
+      return getArticle(section.id, orderBy)
+      .then((data) => {
+        setGlobalState(prev => {
+          const d = new Map(prev.dataDictionary);
+          d.set(section.id, data);
+          return ({...prev, dataDictionary: d});
+        });
+      })
+    })).then(() => {
+      setGlobalState(prev => ({...prev, isLoading: false}));
+    });
+  },[setGlobalState, orderBy]);
+
   return (
     <main className="main layout">
-      <PageHeader />
-      <Grid gridMode="mosaic" title="" cards={[]} id="news" />
+      <PageHeader title={topNews.title} />
+      {isLoading
+        ? <Spinner />
+        : <>
+            <Grid gridType="mosaic" cards={mapData(dataDictionary.get(topNews.id))} />
 
-      {sections.map((section, index) => { return (
-        <Grid
-          key={section.id + index}
-          title={section.title}
-          id={section.id}
-          cards={[]}
-        />
-      )})}
+            {otherNews.map((section, index) => {
+              const cards = mapData(dataDictionary.get(section.id));
+              return (
+                <Grid
+                  gridType="grid"
+                  key={section.id + index}
+                  title={section.title}
+                  cards={cards}
+                />
+              )
+            })}
+          </>
+      }
     </main>
   );
 };
-
-export default Home;

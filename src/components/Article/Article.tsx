@@ -1,8 +1,8 @@
 import React from 'react';
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 import './Article.scss';
 
-const Article = () => {
+export const Article = () => {
   return (
     <main className="layout">
       <Button />
@@ -21,5 +21,3 @@ const Article = () => {
     </main>
   );
 };
-
-export default Article;

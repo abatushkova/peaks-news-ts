@@ -1,3 +1,9 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 .layout {
   width: 100%;
   max-width: 1150px;
@@ -7,5 +13,5 @@
 }
 
 .main {
-  padding-bottom: 260px;
+  flex-grow: 1;
 }
