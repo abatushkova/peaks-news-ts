@@ -5,7 +5,13 @@ This project was build with [Create React App](https://github.com/facebook/creat
 
 ## Project status
 This app is currently in development.  
-Tasks to create *Article* page, to build add/remove bookmark functionality, to add pagination by 15 elements with infinite scroll to *Search results* and *All bookmark*, to add *not found/api error* response are in progress.
+Tasks below are in progress: 
+- to create *Article* page.
+- to build add/remove bookmark functionality.
+- to add pagination by 15 elements with infinite scroll to *Search results* and *All bookmark* pages.
+- to add *not found/api error* pages.
+- to fix magnify glass click.
+- to fix click outside search field.
 
 ## Installation
 You will need node and npm installed globally on your machine.
