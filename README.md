@@ -1,10 +1,11 @@
 # The Peaks News
 
+Latest news in sports, culture, life and style from TheGuardian API.
 This project was build with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Project status
 This app is currently in development.  
-Task to create *Article* page with parsed content, to build add/remove bookmark functionality, to add pagination by 15 elements with infinite scroll to *Search results* and *All bookmark* pages is in progress.
+Tasks to create *Article* page, to build add/remove bookmark functionality, to add pagination by 15 elements with infinite scroll to *Search results* and *All bookmark*, to add *not found/api error* response are in progress.
 
 ## Installation
 You will need node and npm installed globally on your machine.

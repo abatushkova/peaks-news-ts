@@ -5,7 +5,7 @@ export const mapData = (articles:ArticleEntity[] | undefined) => {
   return articles?.map(article => ({
     title: article.webTitle,
     headline: article.fields.headline,
-    body: article.fields.body.slice(0, 120).replace(/(<([^>]+)>)/ig, '').concat('...'),
+    body: article.fields.body.slice(0, 81).replace(/(<([^>]+)>)/ig, '').concat('...'),
     thumbnail: article.fields.thumbnail,
     cardId: article.id,
     size: '',
