@@ -1,6 +1,6 @@
 import React from 'react';
 import { PageHeader } from '../PageHeader/PageHeader';
-import { Grid } from '../../components/Grid/Grid';
+import { Grid } from '../Grid/Grid';
 import './Bookmarks.scss';
 
 export const Bookmarks = () => {

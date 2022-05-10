@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { PageHeader } from '../PageHeader/PageHeader';
-import { Grid } from '../../components/Grid/Grid';
-import { useTrackedState, useUpdate } from '../../store';
+import { Grid } from '../Grid/Grid';
+import { useTrackedState, useUpdate } from '../../store/globalStore';
 import { Spinner } from '../Spinner/Spinner';
-import { ArticleEntity, getArticle } from '../../services/dataProvider';
-import { CardModel } from '../Card/Card';
+import { getArticle } from '../../services/dataProvider';
+import { mapData } from '../../utils/mapData';
 import './SearchResult.scss';
 
 interface SectionModel {
@@ -15,19 +15,6 @@ interface SectionModel {
 const section: SectionModel = {
     id: 'news|sport|culture|lifeandstyle',
     title: '',
-};
-
-const mapData = (articles:ArticleEntity[] | undefined) => {
-  return articles?.map(article => ({
-    title: article.webTitle,
-    headline: article.fields.headline,
-    body: article.fields.body,
-    thumbnail: article.fields.thumbnail,
-    cardId: article.id,
-    size: '',
-    isTextOnly: false,
-    isTitleOnly: false,
-  })) as CardModel[];
 };
 
 export const SearchResult = () => {
@@ -47,7 +34,7 @@ export const SearchResult = () => {
         d.set(section.id, data);
         return ({...prev, dataDictionary: d, isLoading: false});
       });
-    })
+    });
   },[orderBy, setGlobalState, searchQuery]);
 
   return (

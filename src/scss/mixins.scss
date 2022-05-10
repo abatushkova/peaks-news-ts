@@ -1,0 +1,7 @@
+$desktop_view: #{'only screen and (min-width: 1150px)'};
+
+@mixin desktop {
+  @media #{$desktop_view} {
+    @content;
+  }
+}

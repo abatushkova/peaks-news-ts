@@ -1,14 +1,33 @@
-.card {
-  $this: &;
+@import '../../scss/mixins.scss';
 
+$categories: (
+  'news': '#388E3C',
+  'sport': '#F50057',
+  'lifeandstyle': '#2196F3',
+  'culture': '#FFCA28',
+);
+
+@each $name, $color in $categories {
+  .card--#{$name} {
+    border-bottom: 3px solid #{$color};
+  }
+}
+
+.card {
   position: relative;
   z-index: 0;
   display: flex;
   align-items: flex-end;
   background-color: #0D47A1;
+  box-sizing: border-box;
+  transition: opacity .12s ease-in-out 0s;
+  will-change: opacity;
   &--default {
     align-items: stretch;
     background-color: #09357B;
+  }
+  &:hover {
+    opacity: .95;
   }
 
   &__img-wrapper {
@@ -41,27 +60,27 @@
     min-height: 110px;
     padding: 10px 10px 12px;
     box-sizing: border-box;
-    background-color: rgba(9, 53, 123, 0.9);
+    background-color: rgba(9, 53, 123, .9);
   }
 
   &__title {
     color: #fff;
     font: 700 20px/29px Georgia, serif;
-    letter-spacing: 0.07px;
+    letter-spacing: .07px;
   }
 
-  &[class~='is-6'] {
-    #{$this}__title {
+  &[class~='is-6'] &__title {
+    @include desktop {
       font-size: 24px;
       line-height: 31px;
     }
   }
 
-  &[class~='is-3'] {
-    #{$this}__title {
+  &[class~='is-3'] &__title {
+    @include desktop {
       font-size: 18px;
       line-height: 27px;
-      letter-spacing: 0.063px;
+      letter-spacing: .063px;
     }
   }
 
@@ -82,17 +101,19 @@
   }
 }
 
-.is-6 {
-  grid-column: span 6;
-  grid-row: span 2;
-  height: 423px;
-}
+@include desktop {
+  .is-6 {
+    grid-column: span 6;
+    grid-row: span 2;
+    height: 423px;
+  }
 
-.is-4 {
-  grid-column: span 4;
-  height: 347px;
-}
+  .is-4 {
+    grid-column: span 4;
+    height: 350px;
+  }
 
-.is-3 {
-  grid-column: span 3;
+  .is-3 {
+    grid-column: span 3;
+  }
 }

@@ -11,13 +11,15 @@ export interface CardModel {
   cardId: string;
   isTextOnly: boolean;
   isTitleOnly: boolean;
+  category: string;
+  date: string;
 }
 
 const getClassName = (props: CardModel) => {
   if (props.isTextOnly && props.isTitleOnly) {
-    return `card ${props.size} card--default`
+    return `card card--${props.category} ${props.size} card--default`
   }
-  return `card ${props.size}`;
+  return `card card--${props.category} ${props.size}`;
 };
 
 const renderImage = (props: CardModel) => {
@@ -33,7 +35,7 @@ const renderImage = (props: CardModel) => {
 
 const renderSubtitle = (props: CardModel) => {
   if (!props.isTitleOnly) {
-    return <p className="card__subtitle">{props.headline}</p>
+    return <p className="card__subtitle">{props.body}</p>
   }
   return '';
 };

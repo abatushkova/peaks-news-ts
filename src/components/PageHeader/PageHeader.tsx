@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { useTrackedState, useUpdate } from '../../store';
+import { useTrackedState, useUpdate } from '../../store/globalStore';
 import { Link, useLocation } from 'react-router-dom';
 import './PageHeader.scss';
 
@@ -12,12 +12,12 @@ export const PageHeader = (props:PageHeaderModel) => {
   const { orderBy } = useTrackedState();
   const url = useLocation().pathname;
 
-  const handleChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (evt:ChangeEvent<HTMLSelectElement>) => {
     setGlobalState(state => ({
       ...state,
       orderBy: evt.target.value,
       isLoading: true,
-    }))
+    }));
   };
 
   return (
@@ -31,11 +31,12 @@ export const PageHeader = (props:PageHeaderModel) => {
               <span>View bookmark</span>
             </Link>
         }
-        <div className="page-header__select">
-          <select name="order" onChange={handleChange} value={orderBy}>
+        <div className="page-header__select-wrapper">
+          <select name="order" onChange={handleChange} value={orderBy} className="page-header__select">
             <option className="page-header__option" value="newest" key="newest">Newest first</option>
             <option className="page-header__option" value="oldest" key="oldest">Oldest first</option>
           </select>
+          <span className="page-header__select-icon"></span>
         </div>
       </div>
     </div>

@@ -21,8 +21,9 @@ interface ArticleFieldsEntity {
 
 export interface ArticleEntity {
   id: string;
-  // webPublicationDate: string;
+  webPublicationDate: string;
   webTitle: string;
+  sectionId: string;
   fields: ArticleFieldsEntity;
 }
 

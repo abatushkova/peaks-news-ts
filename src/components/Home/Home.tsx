@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { PageHeader } from '../PageHeader/PageHeader';
 import { Grid } from '../Grid/Grid';
-import { useTrackedState, useUpdate } from '../../store';
+import { useTrackedState, useUpdate } from '../../store/globalStore';
 import { Spinner } from '../Spinner/Spinner';
-import { getArticle, ArticleEntity } from '../../services/dataProvider';
-import { CardModel } from '../Card/Card';
+import { getArticle } from '../../services/dataProvider';
+import { mapData } from '../../utils/mapData';
 import './Home.scss';
 
 interface SectionModel {
@@ -30,19 +30,6 @@ const sections: SectionModel[] = [
     title: 'Life and style',
   },
 ];
-
-const mapData = (articles:ArticleEntity[] | undefined) => {
-  return articles?.map(article => ({
-    title: article.webTitle,
-    headline: article.fields.headline,
-    body: article.fields.body,
-    thumbnail: article.fields.thumbnail,
-    cardId: article.id,
-    size: '',
-    isTextOnly: false,
-    isTitleOnly: false,
-  })) as CardModel[];
-};
 
 export const Home = () => {
   const topNews = sections[0];

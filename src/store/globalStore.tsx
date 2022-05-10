@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createContainer } from 'react-tracked';
-import { ArticleEntity } from './services/dataProvider';
+import { ArticleEntity } from '../services/dataProvider';
 
 interface GlobalStateModel {
   orderBy: string;

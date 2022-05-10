@@ -1,3 +1,5 @@
+@import './fonts/fonts';
+
 html, body {
   height: 100%;
 }
@@ -53,24 +55,18 @@ input,
 button,
 textarea,
 select {
+  padding: 0;
   margin: 0;
+  border: none;
+  outline: none;
   font: inherit;
 }
 
 select {
-  -webkit-appearance: none;
-  appearance: none;
   width: 100%;
-  padding: 0 1em 0 0;
-  margin: 0;
-  border: none;
-  outline: none;
   background-color: transparent;
-  font-size: inherit;
-  font-family: inherit;
   line-height: inherit;
   cursor: inherit;
-
   &::-ms-expand {
     display: none;
   }
@@ -82,16 +78,28 @@ input::-moz-focus-inner {
   margin: 0;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-  cursor: pointer;
-}
-
 button {
   background-color: transparent;
   color: inherit;
   border-width: 0;
   padding: 0;
   cursor: pointer;
+}
+
+input,
+button,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+:focus:not(:focus-visible){
+  outline: 0;
 }

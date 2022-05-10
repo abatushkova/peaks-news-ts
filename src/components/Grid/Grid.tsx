@@ -37,7 +37,7 @@ const renderMosaicCards = (cards:CardModel[]) => {
 
 const renderGridCards = (cards:CardModel[]) => {
   return cards.map((cardProps) => {
-    return <Card {...cardProps} size='is-4' key={cardProps.cardId} />
+    return <Card {...cardProps} size='is-4' isTitleOnly={true} key={cardProps.cardId} />
   })
 };
 
